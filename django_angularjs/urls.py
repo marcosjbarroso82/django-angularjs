@@ -5,7 +5,7 @@ from django.conf import settings
 
 from rest_framework.routers import DefaultRouter
 
-from poll.views import ChoiceModelViewSet, PollModelViewSet
+from apps.poll.views import ChoiceModelViewSet, PollModelViewSet
 
 router = DefaultRouter()
 router.register(r'poll', PollModelViewSet, base_name='polls')
