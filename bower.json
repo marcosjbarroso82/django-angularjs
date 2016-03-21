@@ -1,0 +1,7 @@
+{
+  "name": "django-angularjs",
+  "version": "1.5.1",
+  "dependencies": {
+    "angular": "~1.5.1"
+  }
+}
