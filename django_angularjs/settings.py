@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w^p*)4l^w3l1dvbsak@=c9aimchm^42qit!-ynd8x-p05h*1#+'
+SECRET_KEY = 'hqj7vie*!^s)f@w7n84pzpoqmyvwad+b(#)u(5=g667j485ea&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-
-    'apps.polls',
+    'corsheaders',
+    'apps.poll',
+    'apps.polls'
 ]
 
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,9 +120,29 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-# APPEND_SLASH=False
-# APPEND_SLASH=False
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "static")
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.DjangoFilterBackend',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
+}
